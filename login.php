@@ -68,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="https://www.contoso.com/logo.ico" type="image/x-icon">
-    <title>登录 - LYKNS ArchivesCenter</title>
+  <link rel="icon" href="https://www.contoso.com/pinwheel.ico" type="image/x-icon">
+    <title>登录 - ArchivesCenter</title>
     <link href="https://www.contoso.com/bootstrap.min.css" rel="stylesheet">
     <script src="https://www.contoso.com/bootstrap.bundle.min.js"></script>
     <style>
@@ -98,11 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 <div class="d-flex flex-column">
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark" style="position: fixed;width: 100%;">
         <a class="navbar-brand" href="https://www.contoso.com/">
-            <img src="https://www.contoso.com/logo.svg" alt="logo"
+            <img src="https://www.contoso.com/pinwheel-wf.svg" alt="logo"
                  style="width:40px;margin:0 0 0 10px;">
-            LYKNS ArchivesCenter
+            ArchivesCenter
         </a>
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -111,10 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     </nav>
 
-    <div class="flex-fill">
+    <div class="flex-fill" style="margin: 50px 0 0 0">
         <div class="container-fluid">
             <div class="main-container">
-                <h2 class="mb-4">登录 LYKNS ArchivesCenter</h2>
+                <h2 class="mb-4">登录 ArchivesCenter</h2>
                 
                 <form method="post" autocomplete="off" class="login-form">
                     <div class="mb-3">

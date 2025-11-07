@@ -2,6 +2,28 @@
 /* oobe.php 一站式初始化 - 优化版 */
 session_start();
 
+/* ✅ 检查是否已初始化 */
+if (file_exists(__DIR__ . '/config.php')) {
+    $config = include __DIR__ . '/config.php';
+    $conn = @new mysqli($config['db_host'], $config['db_username'], $config['db_password'], $config['db_name']);
+    if (!$conn->connect_error) {
+        $conn->set_charset('utf8mb4');
+
+        // 检查 users 表是否存在
+        $check = $conn->query("SHOW TABLES LIKE 'users'");
+        if ($check && $check->num_rows > 0) {
+            // 检查是否已有管理员
+            $result = $conn->query("SELECT COUNT(*) AS c FROM `users`");
+            $row = $result->fetch_assoc();
+            if ($row['c'] > 0) {
+                // ✅ 已初始化 → 直接跳主界面
+                header("Location: /index.php");
+                exit;
+            }
+        }
+    }
+}
+
 $success = false;
 $msg = null;
 $form_data = [];
@@ -135,10 +157,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>系统初始化 - LYKNS ArchivesCenter</title>
+    <title>系统初始化 - ArchivesCenter</title>
     <link href="https://www.contoso.com/bootstrap.min.css" rel="stylesheet">
     <script src="https://www.contoso.com/bootstrap.bundle.min.js"></script>
-  <link rel="icon" href="https://www.contoso.com/logo.ico" type="image/x-icon">
+  <link rel="icon" href="https://www.contoso.com/pinwheel.ico" type="image/x-icon">
     <style>
         body {
             background: #fff;
@@ -177,10 +199,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 <div class="d-flex flex-column">
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark" style="position: fixed;width: 100%;">
         <a class="navbar-brand" href="https://www.contoso.com/">
-            <img src="https://www.contoso.com/logo.svg" alt="logo" style="width:40px;margin:0 0 0 10px;">
-            LYKNS ArchivesCenter
+            <img src="https://www.contoso.com/pinwheel-wf.svg" alt="logo" style="width:40px;margin:0 0 0 10px;">
+            ArchivesCenter
         </a>
         <ul class="navbar-nav">
             <li class="nav-item"><a class="nav-link active">系统初始化</a></li>
@@ -188,11 +210,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </ul>
     </nav>
 
-    <div class="flex-fill">
+    <div class="flex-fill" style="margin: 50px 0 0 0">
         <div class="container-fluid">
             <div class="main-container">
                 <h2 class="mb-3">首次使用初始化</h2>
-                <p class="text-muted mb-4">欢迎使用 LYKNS ArchivesCenter！请填写以下信息完成系统初始化。</p>
+                <p class="text-muted mb-4">欢迎使用 ArchivesCenter！请填写以下信息完成系统初始化。</p>
 
                 <form method="post" autocomplete="off" class="oobe-form">
                     <!-- 数据库配置 -->

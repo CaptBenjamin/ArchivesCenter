@@ -2,6 +2,40 @@
 /* index.php 首页 - 优化版 */
 session_start();
 
+/* ✅ 未初始化系统则跳转到 oobe */
+if (!file_exists(__DIR__ . '/config.php')) {
+    header("Location: /oobe.php");
+    exit;
+}
+
+$config = include __DIR__ . '/config.php';
+$conn = @new mysqli(
+    $config['db_host'],
+    $config['db_username'],
+    $config['db_password'],
+    $config['db_name']
+);
+
+if ($conn && !$conn->connect_error) {
+    $conn->set_charset('utf8mb4');
+
+    // 检查 users 表是否存在 & 是否已有管理员
+    $check = $conn->query("SHOW TABLES LIKE 'users'");
+    if (!$check || $check->num_rows === 0) {
+        header("Location: /oobe.php");
+        exit;
+    }
+
+    $result = $conn->query("SELECT COUNT(*) AS c FROM users");
+    $count = $result->fetch_assoc()['c'];
+
+    if ($count == 0) {
+        header("Location: /oobe.php");
+        exit;
+    }
+}
+
+
 $people_count = 0;
 $logs_count   = 0;
 $is_logged_in = isset($_SESSION['username']);
@@ -41,10 +75,10 @@ if ($is_logged_in) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>首页 - LYKNS ArchivesCenter</title>
+    <title>首页 - ArchivesCenter</title>
     <link href="https://www.contoso.com/bootstrap.min.css" rel="stylesheet">
     <script src="https://www.contoso.com/bootstrap.bundle.min.js"></script>
-  <link rel="icon" href="https://www.contoso.com/logo.ico" type="image/x-icon">
+  <link rel="icon" href="https://www.contoso.com/pinwheel.ico" type="image/x-icon">
     <style>
         body {
             background: #fff;
@@ -94,28 +128,44 @@ if ($is_logged_in) {
 <body>
 <div class="d-flex flex-column">
     <!-- 导航栏 -->
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
-        <a class="navbar-brand" href="https://www.contoso.com/">
-            <img src="https://www.contoso.com/logo.svg" alt="logo"
-                 style="width:40px;margin:0 0 0 10px;">
-            LYKNS ArchivesCenter
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="https://www.contoso.com/pinwheel-wf.svg" alt="logo"
+                 style="width:32px;margin-right:8px;">
+            ArchivesCenter
         </a>
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link active" href="https://www.contoso.com/">欢迎</a></li>
-            <?php if ($is_logged_in): ?>
-                <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/search.php">综合搜索</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/people.php">人物</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/logs.php">日志</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/settings.php">设置</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/logout.php">注销</a></li>
-            <?php else: ?>
-                <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/login.php">登录</a></li>
-            <?php endif; ?>
-        </ul>
-    </nav>
+
+        <!-- 折叠按钮（移动端汉堡按钮） -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="切换导航">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- 折叠菜单区域 -->
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item"><a class="nav-link active" href="/">首页</a></li>
+
+                <?php if ($is_logged_in): ?>
+                    <li class="nav-item"><a class="nav-link" href="/search.php">综合搜索</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/people.php">人物</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logs.php">日志</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/settings.php">设置</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/logout.php">注销</a></li>
+                <?php else: ?>
+                    <li class="nav-item"><a class="nav-link" href="/login.php">登录</a></li>
+                <?php endif; ?>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
 
     <!-- 主体内容 -->
-    <div class="flex-fill">
+    <div class="flex-fill" style="margin: 50px 0 0 0">
         <div class="container-fluid">
             <div class="main-container">
                 <?php if ($is_logged_in): ?>
@@ -146,11 +196,11 @@ if ($is_logged_in) {
                         </div>
                     </div>
                 <?php else: ?>
-                    <h1 class="mb-3">欢迎访问 LYKNS ArchivesCenter</h1>
+                    <h1 class="mb-3">欢迎访问 ArchivesCenter</h1>
                     <div class="alert alert-danger">
                         <strong>未授权的访问！</strong> 请先 <a href="https://www.contoso.com/login.php" class="alert-link">登录</a>。
                     </div>
-                    <p class="mt-4 text-muted">LYKNS ArchivesCenter 是一个用于管理人物信息和日志的档案管理系统。</p>
+                    <p class="mt-4 text-muted">ArchivesCenter 是一个用于管理人物信息和日志的档案管理系统。</p>
                 <?php endif; ?>
             </div>
         </div>
