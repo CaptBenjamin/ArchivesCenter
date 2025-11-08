@@ -4,4 +4,4 @@ an archive management system for managing personal information and logs, similar
 ## Installation
 
 1. Prepare a PHP environment and MySQL database in advance.  
-2. Browse to `oobe.php`.
+2. Browse to `index.php`.
