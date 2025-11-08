@@ -68,10 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="https://www.contoso.com/pinwheel.ico" type="image/x-icon">
+  <link rel="icon" href="/pinwheel.ico" type="image/x-icon">
     <title>登录 - ArchivesCenter</title>
-    <link href="https://www.contoso.com/bootstrap.min.css" rel="stylesheet">
-    <script src="https://www.contoso.com/bootstrap.bundle.min.js"></script>
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <script src="/bootstrap.bundle.min.js"></script>
     <style>
         body {
             background: #fff;
@@ -98,17 +98,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 <div class="d-flex flex-column">
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark" style="position: fixed;width: 100%;">
-        <a class="navbar-brand" href="https://www.contoso.com/">
-            <img src="https://www.contoso.com/pinwheel-wf.svg" alt="logo"
-                 style="width:40px;margin:0 0 0 10px;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <img src="/pinwheel-wf.svg" alt="logo"
+                 style="width:32px;margin-right:8px;">
             ArchivesCenter
-        </a>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" href="https://www.contoso.com/login.php">登录</a>
-            </li>
-        </ul>
+            </a>
+        </div>
     </nav>
 
     <div class="flex-fill" style="margin: 50px 0 0 0">

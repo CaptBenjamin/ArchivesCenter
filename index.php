@@ -76,9 +76,9 @@ if ($is_logged_in) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>首页 - ArchivesCenter</title>
-    <link href="https://www.contoso.com/bootstrap.min.css" rel="stylesheet">
-    <script src="https://www.contoso.com/bootstrap.bundle.min.js"></script>
-  <link rel="icon" href="https://www.contoso.com/pinwheel.ico" type="image/x-icon">
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <script src="/bootstrap.bundle.min.js"></script>
+  <link rel="icon" href="/pinwheel.ico" type="image/x-icon">
     <style>
         body {
             background: #fff;
@@ -131,7 +131,7 @@ if ($is_logged_in) {
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="/">
-            <img src="https://www.contoso.com/pinwheel-wf.svg" alt="logo"
+            <img src="/pinwheel-wf.svg" alt="logo"
                  style="width:32px;margin-right:8px;">
             ArchivesCenter
         </a>
@@ -146,7 +146,7 @@ if ($is_logged_in) {
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <li class="nav-item"><a class="nav-link active" href="/">首页</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/">欢迎</a></li>
 
                 <?php if ($is_logged_in): ?>
                     <li class="nav-item"><a class="nav-link" href="/search.php">综合搜索</a></li>
@@ -161,7 +161,7 @@ if ($is_logged_in) {
             </ul>
         </div>
     </div>
-</nav>
+    </nav>
 
 
     <!-- 主体内容 -->
@@ -190,15 +190,15 @@ if ($is_logged_in) {
                     <div class="mt-4">
                         <h5 class="mb-3">快速操作</h5>
                         <div class="d-flex gap-2 flex-wrap">
-                            <a href="https://www.contoso.com/people/create.php" class="btn btn-primary">创建新人物</a>
-                            <a href="https://www.contoso.com/logs/create.php" class="btn btn-primary">创建新日志</a>
-                            <a href="https://www.contoso.com/search.php" class="btn btn-outline-primary">搜索</a>
+                            <a href="/people/create.php" class="btn btn-primary">创建新人物</a>
+                            <a href="/logs/create.php" class="btn btn-primary">创建新日志</a>
+                            <a href="/search.php" class="btn btn-outline-primary">搜索</a>
                         </div>
                     </div>
                 <?php else: ?>
                     <h1 class="mb-3">欢迎访问 ArchivesCenter</h1>
                     <div class="alert alert-danger">
-                        <strong>未授权的访问！</strong> 请先 <a href="https://www.contoso.com/login.php" class="alert-link">登录</a>。
+                        <strong>未授权的访问！</strong> 请先 <a href="/login.php" class="alert-link">登录</a>。
                     </div>
                     <p class="mt-4 text-muted">ArchivesCenter 是一个用于管理人物信息和日志的档案管理系统。</p>
                 <?php endif; ?>

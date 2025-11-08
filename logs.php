@@ -97,9 +97,9 @@ $conn->close();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>日志 - ArchivesCenter</title>
-    <link href="https://www.contoso.com/bootstrap.min.css" rel="stylesheet">
-    <script src="https://www.contoso.com/bootstrap.bundle.min.js"></script>
-  <link rel="icon" href="https://www.contoso.com/pinwheel.ico" type="image/x-icon">
+    <link href="/bootstrap.min.css" rel="stylesheet">
+    <script src="/bootstrap.bundle.min.js"></script>
+  <link rel="icon" href="/pinwheel.ico" type="image/x-icon">
     <style>
         body {
             background: #fff;
@@ -147,19 +147,35 @@ $conn->close();
 
 <body>
 <div class="d-flex flex-column">
-    <nav class="navbar navbar-expand-sm bg-primary navbar-dark" style="position: fixed;width: 100%;">
-        <a class="navbar-brand" href="https://www.contoso.com/">
-            <img src="https://www.contoso.com/pinwheel-wf.svg" alt="logo" style="width:40px;margin: 0 0 0 10px;">
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="/pinwheel-wf.svg" alt="logo"
+                 style="width:32px;margin-right:8px;">
             ArchivesCenter
         </a>
-        <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/">欢迎</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/search.php">综合搜索</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/people.php">人物</a></li>
-            <li class="nav-item"><a class="nav-link active" href="https://www.contoso.com/logs.php">日志</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/settings.php">设置</a></li>
-            <li class="nav-item"><a class="nav-link" href="https://www.contoso.com/logout.php">注销</a></li>
-        </ul>
+
+        <!-- 折叠按钮（移动端汉堡按钮） -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="切换导航">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- 折叠菜单区域 -->
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item"><a class="nav-link" href="/">欢迎</a></li>
+                <li class="nav-item"><a class="nav-link" href="/search.php">综合搜索</a></li>
+                <li class="nav-item"><a class="nav-link" href="/people.php">人物</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/logs.php">日志</a></li>
+                <li class="nav-item"><a class="nav-link" href="/settings.php">设置</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout.php">注销</a></li>
+
+            </ul>
+        </div>
+    </div>
     </nav>
 
     <div class="flex-fill" style="margin: 50px 0 0 0">
@@ -168,10 +184,7 @@ $conn->close();
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2>日志</h2>
                     <a href="/logs/create.php" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16" style="margin-right: 5px;">
-                            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                        </svg>
-                        新建日志
+                        ＋ 新建日志
                     </a>
                 </div>
 
