@@ -194,13 +194,16 @@ $conn->close();
                         <p class="mb-0 mt-2">开始创建您的第一条日志吧！</p>
                     </div>
                 <?php else: ?>
-                    <!-- 筛选器 -->
+                   <!-- 筛选器 -->
                     <div class="filter-section">
-                        <form method="get" class="row g-2 align-items-center">
-                            <div class="col-auto">
+                        <form method="get" class="row g-2">
+                        <!-- 筛选字样单独占一行（移动端），PC端仍在同一行 -->
+                            <div class="col-12 col-md-auto">
                                 <label class="col-form-label fw-bold">筛选：</label>
                             </div>
-                            <div class="col-auto">
+
+                            <!-- 年份选择 -->
+                            <div class="col-6 col-md-auto">
                                 <select class="form-select" name="year" onchange="this.form.submit()">
                                     <option value="0" <?= $year == 0 ? 'selected' : '' ?>>全部年份</option>
                                     <?php foreach ($existYears as $y): ?>
@@ -208,23 +211,21 @@ $conn->close();
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="col-auto">
+
+                            <!-- 月份选择 -->
+                            <div class="col-6 col-md-auto">
                                 <select class="form-select" name="month" onchange="this.form.submit()">
                                     <option value="0" <?= $month == 0 ? 'selected' : '' ?>>全部月份</option>
-                                    <?php if ($year > 0 && !empty($existMonths)): ?>
-                                        <?php foreach ($existMonths as $m): ?>
-                                            <option value="<?= $m ?>" <?= $m == $month ? 'selected' : '' ?>><?= $m ?> 月</option>
-                                        <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <?php for ($m = 1; $m <= 12; $m++): ?>
-                                            <option value="<?= $m ?>" <?= $m == $month ? 'selected' : '' ?>><?= $m ?> 月</option>
-                                        <?php endfor; ?>
-                                    <?php endif; ?>
+                                    <?php foreach ($existMonths as $m): ?>
+                                        <option value="<?= $m ?>" <?= $m == $month ? 'selected' : '' ?>><?= $m ?> 月</option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
+
+                            <!-- 清除按钮仍可放右边 -->
                             <?php if ($year > 0 || $month > 0): ?>
-                                <div class="col-auto">
-                                    <a href="/logs.php" class="btn btn-outline-secondary btn-sm">清除筛选</a>
+                                <div class="col-12 col-md-auto">
+                                    <a href="/logs.php" class="btn btn-outline-secondary btn-sm w-100 w-md-auto">清除筛选</a>
                                 </div>
                             <?php endif; ?>
                         </form>

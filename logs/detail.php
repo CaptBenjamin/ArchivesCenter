@@ -117,17 +117,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete'])) {
     <div class="flex-fill container-fluid main-container mb-3" style="margin: 50px 0 0 0">
         <div class="container-fluid">
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h2>日志详情</h2>
-                <div>
-                    <?php if ($prevId): ?>
-                        <a href="/logs/detail.php?id=<?= $prevId ?>" class="btn btn-outline-primary me-2">上一条</a>
-                    <?php endif; ?>
-                    <?php if ($nextId): ?>
-                        <a href="/logs/detail.php?id=<?= $nextId ?>" class="btn btn-outline-primary me-2">下一条</a>
-                    <?php endif; ?>
-                    <a href="/logs/edit.php?id=<?= $log['id'] ?>" class="btn btn-warning me-2">编辑</a>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delModal">删除</button>
+            <div class="row mb-3">
+                <div class="col-12 col-md-auto mb-2 mb-md-0">
+                    <h2 class="mb-0">日志详情</h2>
+                </div>
+
+                <div class="col-12 col-md-auto">
+                    <div class="d-flex flex-wrap gap-2">
+                        <?php if ($prevId): ?>
+                            <a href="/logs/detail.php?id=<?= $prevId ?>" class="btn btn-outline-primary">上一条</a>
+                        <?php endif; ?>
+                        <?php if ($nextId): ?>
+                            <a href="/logs/detail.php?id=<?= $nextId ?>" class="btn btn-outline-primary">下一条</a>
+                        <?php endif; ?>
+                        <a href="/logs/edit.php?id=<?= $log['id'] ?>" class="btn btn-warning">编辑</a>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delModal">删除</button>
+                    </div>
                 </div>
             </div>
 
